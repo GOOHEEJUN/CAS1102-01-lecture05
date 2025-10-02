@@ -4,23 +4,22 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "third_party/stb/stb_image.h"
 
-#include <iostream> // 혹시 모르니 파일 맨 위에 이 줄이 있는지 확인해주세요.
+
+
 
 void decode_steganography(int image_data[], int data_size, std::string key) {
     
+    .
     int currentIndex = 1000;
     int key_char_index = 0;
 
-    // --- 디버깅 코드 시작 ---
-    // 반복문에 들어가기 전에, 시작 위치(1000)의 값이 무엇인지 직접 확인해봅시다.
-    // 이 값이 0이라면 아무것도 출력되지 않는 것이 맞습니다.
-    std::cout << "[디버그 정보] 시작 인덱스 1000의 값: " << image_data[1000] << std::endl;
-    // --- 디버깅 코드 끝 ---
-
-    // 로직은 슬라이드 설명과 가장 일치하는 첫 번째 버전으로 되돌립니다.
+   
     while (true) {
+        char key_char = key[key_char_index % key.length()];
+        currentIndex += static_cast<int>(key_char);
+        
         if (currentIndex >= data_size) {
-            break;
+            break; 
         }
 
         int secret_value = image_data[currentIndex];
@@ -30,13 +29,10 @@ void decode_steganography(int image_data[], int data_size, std::string key) {
         }
 
         std::cout << static_cast<char>(secret_value);
-        
-        char key_char = key[key_char_index % key.length()];
-        currentIndex += static_cast<int>(key_char);
+
         key_char_index++;
     }
 }
-
 
 
 // DO NOT EDIT THE MAIN FUNCTION
